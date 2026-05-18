@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efeito Retângulo Capitã Marvel</title>
+    <style>
+        /* Configuração do fundo da página */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000; /* Fundo preto */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        /* O contêiner principal */
+        .container {
+            position: relative;
+            width: 550px; /* Largura de retângulo */
+            height: 380px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* O retângulo colorido de fundo */
+        .retangulo {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #d41e31, #491f8f);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            overflow: hidden; /* Corta as pernas da imagem de fundo */
+            z-index: 1;
+        }
+
+        /* Contêiner para alinhar as imagens sempre na base */
+        .moldura-imagem {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end; /* Alinha a imagem na base do retângulo */
+        }
+
+        /* Configuração base para as duas imagens (fundo e topo) */
+        .card-img {
+            height: 100%; /* Começa exatamente do tamanho da altura do retângulo */
+            transition: all 0.5s ease-in-out;
+            pointer-events: none;
+            transform-origin: bottom center; /* Força o crescimento para CIMA e para os lados */
+            transform: translateX(0) scale(1);
+        }
+
+        /* Imagem Superior: Mostra apenas da cintura para cima (Braços e Cabeça livres) */
+        .img-topo {
+            position: absolute;
+            z-index: 10; /* Fica acima do retângulo */
+            /* Corta a imagem na metade (linha da cintura) deixando os braços e cabeça visíveis fora */
+            clip-path: polygon(0% 0%, 100% 0%, 100% 58%, 0% 58%); 
+        }
+
+        /* Imagem de Fundo: Fica presa dentro do retângulo pelo overflow:hidden */
+        .img-fundo {
+            position: relative;
+        }
+
+        /* Texto explicativo COLORIDO na ESQUERDA */
+        .info-texto {
+            position: absolute;
+            left: -100%; /* Começa fora do retângulo */
+            width: 42%;
+            padding: 25px;
+            transition: all 0.5s ease-in-out;
+            opacity: 0;
+            z-index: 2;
+        }
+
+        /* Estilos do Texto Colorido */
+        .info-texto h2 {
+            margin: 0 0 10px 0;
+            font-size: 26px;
+            background: linear-gradient(to right, #ffeb3b, #ff9800);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            font-weight: 900;
+        }
+
+        .info-texto p {
+            margin: 0;
+            font-size: 15px;
+            line-height: 1.5;
+            color: #e0f7fa;
+        }
+
+        .info-texto .destaque {
+            color: #ff4081;
+            font-weight: bold;
+        }
+
+        /* --- EFEITO AO PASSAR O MOUSE (HOVER) --- */
+
+        /* Faz ambas as imagens deslizarem para a DIREITA e crescerem para CIMA */
+        .container:hover .card-img {
+            transform: translateX(130px) scale(1.4); /* Move para a direita e aumenta 40% */
+        }
+
+        /* Faz o texto colorido aparecer na esquerda */
+        .container:hover .info-texto {
+            left: 20px;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="retangulo">
+            <div class="info-texto">
+                <h2>Capitã Marvel</h2>
+                <p>Carol Danvers se torna uma das heroínas mais <span class="destaque">poderosas</span> do universo em uma guerra galáctica entre duas raças <span class="destaque">alienígenas</span>.</p>
+            </div>
+            
+            <div class="moldura-imagem">
+                <img class="card-img img-fundo" src="1.png" alt="Capitã Marvel">
+            </div>
+        </div>
+
+        <div class="moldura-imagem">
+            <img class="card-img img-topo" src="1.png" alt="Capitã Marvel">
+        </div>
+        
+    </div>
+
+</body>
+</html>
